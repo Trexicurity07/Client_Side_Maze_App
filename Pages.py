@@ -3,6 +3,19 @@ from PIL import Image
 # ------------------ IMPORTS ------------------
 
 
+def GetExecutablePath(NormalPath):
+    try:
+        Additional = sys._MEIPASS
+        # When running from .exe, all non py files are stored in folder in temp
+        # This temp folder path is attatched to _MEIPASS
+
+        return path.join(Additional, NormalPath)  #  Creates absolute path to the non py files
+
+    except AttributeError:
+        # When running from normal directory, no _MEIPASS is defined
+
+        return NormalPath
+
 def CreateWindow():
     Window = CTk()
     # help(CTkLabel.grid)
@@ -11,7 +24,7 @@ def CreateWindow():
     Window.geometry('700x550+250+50')
     Window.resizable(False, False)
 
-    Window.iconbitmap(default = 'App/Images/Logo.ico')  #  Remove App/ path at runtime
+    Window.iconbitmap(default = GetExecutablePath('App/Images/Logo.ico'))  #  Remove App/ path at runtime
     # Only takes .ico images
     # More reliable than iconphoto as CTk runs Tk which runs its own iconbitmap() which may override iconphoto
 
@@ -29,21 +42,21 @@ BigFont = CTkFont(size = 24, weight = 'bold')
 TitleFont = CTkFont(size = 36, weight = 'bold')
 # Font family not specified as it would rely on user installing certain fonts files
 
-LoginImg = CTkImage(Image.open('App/Images/LoginBG.png'), size = (700, 550))
-ShowImg = CTkImage(Image.open('App/Images/Show.png'), size = (20, 20))
-HomeBGImg = CTkImage(Image.open('App/Images/HomeBG.png'), size = (700, 550))
-CreateImg = CTkImage(Image.open('App/Images/Create.png'), size = (95, 95))
-ExploreImg = CTkImage(Image.open('App/Images/Explore.png'), size = (95, 95))
-SearchImg = CTkImage(Image.open('App/Images/Search.png'), size = (55, 45))
-HomeImg = CTkImage(Image.open('App/Images/Home.png'), size = (15, 15))
-ForwardImg = CTkImage(Image.open('App/Images/Forward.png'), size = (15, 15))
-BackImg = CTkImage(Image.open('App/Images/Back.png'), size = (15, 15))
-StartImg = CTkImage(Image.open('App/Images/Start.png'), size = (20, 20))
-EndImg = CTkImage(Image.open('App/Images/End.png'), size = (20, 20))
-WallImg = CTkImage(Image.open('App/Images/Wall.png'), size = (20, 20))
-PathImg = CTkImage(Image.open('App/Images/Path.png'), size = (20, 20))
-SendImg = CTkImage(Image.open('App/Images/Send.png'), size = (20, 20))
-LikeImg = CTkImage(Image.open('App/Images/Like.png'), size = (30, 30))
+LoginImg = CTkImage(Image.open(GetExecutablePath('App/Images/LoginBG.png')), size = (700, 550))
+ShowImg = CTkImage(Image.open(GetExecutablePath('App/Images/Show.png')), size = (20, 20))
+HomeBGImg = CTkImage(Image.open(GetExecutablePath('App/Images/HomeBG.png')), size = (700, 550))
+CreateImg = CTkImage(Image.open(GetExecutablePath('App/Images/Create.png')), size = (95, 95))
+ExploreImg = CTkImage(Image.open(GetExecutablePath('App/Images/Explore.png')), size = (95, 95))
+SearchImg = CTkImage(Image.open(GetExecutablePath('App/Images/Search.png')), size = (55, 45))
+HomeImg = CTkImage(Image.open(GetExecutablePath('App/Images/Home.png')), size = (15, 15))
+ForwardImg = CTkImage(Image.open(GetExecutablePath('App/Images/Forward.png')), size = (15, 15))
+BackImg = CTkImage(Image.open(GetExecutablePath('App/Images/Back.png')), size = (15, 15))
+StartImg = CTkImage(Image.open(GetExecutablePath('App/Images/Start.png')), size = (20, 20))
+EndImg = CTkImage(Image.open(GetExecutablePath('App/Images/End.png')), size = (20, 20))
+WallImg = CTkImage(Image.open(GetExecutablePath('App/Images/Wall.png')), size = (20, 20))
+PathImg = CTkImage(Image.open(GetExecutablePath('App/Images/Path.png')), size = (20, 20))
+SendImg = CTkImage(Image.open(GetExecutablePath('App/Images/Send.png')), size = (20, 20))
+LikeImg = CTkImage(Image.open(GetExecutablePath('App/Images/Like.png')), size = (30, 30))
 # Loading images
 # ------------------ VARIABLES ------------------
 
@@ -859,4 +872,5 @@ def CreateProfile(MazePress, GetNewData):
             'UserLabel' : UserLabel,
             'ScrollableFrame' : Scrollables,
             'PageVars' : PageList,
+
             'Widgets' : WidgetList}
